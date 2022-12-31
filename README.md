@@ -1,51 +1,30 @@
-# onenote-to-markdown
+# OneNote导出成Markdown文件的脚本
 
-## Pre-requisites
+## 步骤
 
-- You must have Pandoc installed on your system and accessible in your system PATH. Check by running `pandoc --version` in a PowerShell or cmd window.
-- Python version only: You must have Python 3 installed on your system. This README assumes it is accessible via `python`, but other aliases, such as `python3`, are fine.
+### 安装Pandoc
 
-## Python Version
+在 https://pandoc.org/ 网站下载安装Pandoc软件，默认会加入到Path环境变量中。打开cmd并输入 pandoc ，如果没提示找不到命令，就是成功了。
 
-**Video/blog post: https://pagekeytech.com/blog/misc/onenote-to-markdown-python**
+### 准备个Python3.8+的环境
 
-1. Install the requirements.
+
+1. 安装依赖.
 
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Open OneNote and ensure the notebook you'd like to convert is open.
+2. 打开OneNote软件（注意，需要是OneNote 2016，不能是OneNote For Win10之类的版本，详情查看 https://support.microsoft.com/zh-cn/office/onenote-%E7%89%88%E6%9C%AC%E6%9C%89%E4%BD%95%E5%8C%BA%E5%88%AB-a624e692-b78b-4c09-b07f-46181958118f ）
 
-3. Run the script.
+3. 运行代码.
 
 ```bash
 python convert.py
 ```
 
-4. Find your converted notes in `~/Desktop/OneNoteExport`. You're free to do what you want with the notes now - commit them to Git, open them in [obsidian](https://obsidian.md), or whatever.
+4. 你的笔记应该转化成了markdown文件并存在 `~/Desktop/OneNoteExport`. 建议用[obsidian](https://obsidian.md)管理markdown笔记！
 
-## PowerShell Version
+# 致谢
 
-**Video/blog post: https://pagekeysolutions.com/blog/misc/onenote-to-markdown**
-
-This version is a bit more finnicky. It may fail, but feel free to try! Open PowerShell, navigate to this repo, and run:
-
-```ps1
-.\convert3.ps1
-```
-
-## Troubleshooting
-
-### `AttributeError: module 'win32com.gen_py...` has no attribute 'CLSIDToClassMap'
-
-Try [this link](https://stackoverflow.com/questions/52889704/python-win32com-excel-com-model-started-generating-errors), and [this one](https://stackoverflow.com/questions/33267002/why-am-i-suddenly-getting-a-no-attribute-clsidtopackagemap-error-with-win32com). In short:
-
-1. Run `python3` to get an interpreter and execute:
-
-```python
-import win32com
-print(win32com.__gen_path__)
-```
-
-2. Delete the `gen_py` folder indicated in the output of the previous step.
+这部分代码来自 https://github.com/pagekeytech/onenote-to-markdown 。
