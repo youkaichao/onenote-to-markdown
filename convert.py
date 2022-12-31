@@ -10,7 +10,7 @@ import traceback
 from xml.etree import ElementTree
 
 OUTPUT_DIR = os.path.join(os.path.expanduser('~'), "Desktop", "OneNoteExport")
-ASSETS_DIR = "assets"
+ASSETS_DIR = "files"
 PROCESS_RECYCLE_BIN = False
 LOGFILE = 'onenote_to_markdown.log' # Set to None to disable logging
 
@@ -21,6 +21,7 @@ def log(message):
             lf.write(f'{message}\n')
 
 def safe_str(name):
+    return name.replace('/', '_').replace(' ', '_')
     return  re.sub(r'[^.a-zA-Z0-9א-ת]', '_', name)
 
 def extract_pdf_pictures(pdf_path, assets_path, page_name):
@@ -79,7 +80,7 @@ def handle_page(onenote, elem, path, i):
         onenote.Publish(elem.attrib['ID'], path_docx, win32.constants.pfWord, "")
         # Convert docx to markdown
         log("Generating markdown: %s" % path_md)
-        os.system('pandoc.exe -i %s -o %s -t markdown-simple_tables-multiline_tables-grid_tables --wrap=none' % (path_docx, path_md))
+        os.system('pandoc.exe -i "%s" -o "%s" -t markdown-simple_tables-multiline_tables-grid_tables --wrap=none' % (path_docx, path_md))
         # Create pdf (for the picture assets)
         onenote.Publish(elem.attrib['ID'], path_pdf, 3, "")
         # Output picture assets to folder
