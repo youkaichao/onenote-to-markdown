@@ -27,4 +27,4 @@ python convert.py
 
 # 致谢
 
-这部分代码来自 https://github.com/pagekeytech/onenote-to-markdown 。
+这部分代码来自 https://github.com/pagekeytech/onenote-to-markdown 。喜欢用powershell脚本的朋友可以使用仓库中的 convert3.ps1 脚本。
